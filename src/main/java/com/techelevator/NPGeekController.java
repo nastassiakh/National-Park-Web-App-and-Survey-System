@@ -18,6 +18,7 @@ public class NPGeekController {
 	@Autowired
 	private WeatherDAO weatherDao;
 	
+	
 	@RequestMapping("/")
 	public String displayHomepage() {
 		return "homepage";
