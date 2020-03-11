@@ -8,7 +8,9 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
+@Component
 public class JDBCSurveyResultDao implements SurveyResultDao {
 
 	private JdbcTemplate jdbcTemplate;
@@ -28,8 +30,8 @@ public class JDBCSurveyResultDao implements SurveyResultDao {
 	@Override
 	public void createSurveyResult(SurveyResult survey) {
 		Long surveyId = getNextId();
-		String sqlInsertSurvey = "INSERT INTO survey_result(surveyId, parkCode, email, state, activityLevel) VALUES (?,?,?,?,?)";
-		jdbcTemplate.update(sqlInsertSurvey, surveyId, survey.getParkCode(),survey.getEmail(),survey.getState(),survey.getActivityLevel());
+		String sqlInsertSurvey = "INSERT INTO survey_result(surveyId, parkCode, emailaddress, state, activityLevel) VALUES (?,?,?,?,?)";
+		jdbcTemplate.update(sqlInsertSurvey, surveyId, survey.getParkCode(),survey.getEmailaddress(),survey.getState(),survey.getActivityLevel());
 		
 		survey.setSurveyId(surveyId);
 		}
