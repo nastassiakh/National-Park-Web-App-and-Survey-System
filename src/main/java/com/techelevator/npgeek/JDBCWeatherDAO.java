@@ -53,17 +53,18 @@ public class JDBCWeatherDAO implements WeatherDAO {
 			if (forecast.contains("sunny")) {
 				advisory = "Pack some sunblock";
 			}
+			String advisoryTemp = "";
 			if(high > 75) {
-				advisory = advisory + " Bring and extra gallon of water";
+				advisoryTemp = " Bring and extra gallon of water";
 			}
 			if((high - low) >= 20) {
-				advisory = advisory + " Wear breathable layers";
+				advisoryTemp = " Wear breathable layers";
 			}
 			if(low < 20) {
-				advisory = advisory + " Frigid tempatures can be very dangerous";
+				advisoryTemp = " Frigid tempatures can be very dangerous";
 			}
-
 			weather.setAdvisory(advisory);
+			weather.setAdvisoryTemp(advisoryTemp);
 			fiveDayWeather.add(weather);
 		}
 

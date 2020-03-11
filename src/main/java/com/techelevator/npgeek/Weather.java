@@ -7,9 +7,16 @@ public class Weather {
 	private Long high;
 	private String forecast;
 	private String advisory;
+	private String advisoryTemp;
 	
 	
 	
+	public String getAdvisoryTemp() {
+		return advisoryTemp;
+	}
+	public void setAdvisoryTemp(String advisoryTemp) {
+		this.advisoryTemp = advisoryTemp;
+	}
 	public String getAdvisory() {
 		return advisory;
 	}
