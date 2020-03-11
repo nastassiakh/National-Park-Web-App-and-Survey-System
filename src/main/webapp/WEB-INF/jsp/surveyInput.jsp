@@ -45,6 +45,8 @@
 	</div>
 	
 	<div class="formInputGroup">
+	<label for="activityLevel">Activity Level: </label>
+	<br>
 		 <input type="radio" id="inactive" name="inactive" value="inactive">
 		 <label for="inactive">Inactive</label><br>
 		 <input type="radio" id="sedentary" name="sedentary" value="sedentary">
