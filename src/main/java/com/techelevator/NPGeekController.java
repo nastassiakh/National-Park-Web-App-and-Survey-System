@@ -16,6 +16,7 @@ import com.techelevator.npgeek.SurveyResultDao;
 import com.techelevator.npgeek.Weather;
 import com.techelevator.npgeek.WeatherDAO;
 
+
 @Controller
 public class NPGeekController {
 
@@ -31,7 +32,9 @@ public class NPGeekController {
 	
 
 	@RequestMapping("/")
-	public String displayHomepage() {
+	public String displayHomepage(ModelMap map) {
+		List<Park> parks = parkDao.getAllParks();
+		map.put("parks", parks);
 		return "homepage";
 	}
 
@@ -65,7 +68,10 @@ public class NPGeekController {
 	}
 
 	@RequestMapping("/viewsurvey")
-	public String viewsurveys() {
+	public String viewsurveys(ModelMap map) {
+		List<SurveyResult> surveyResult = surveyResultDao.getParksByRating();
+		map.addAttribute("surveyMap", surveyResult);
+		
 		return "parkRating";
 	}
 
