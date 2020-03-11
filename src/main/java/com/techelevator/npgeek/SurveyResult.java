@@ -5,10 +5,9 @@ public class SurveyResult {
 	
 	private Long surveyId ;
 	private String parkCode;
-	private String email;
+	private String emailaddress;
 	private String state;
 	private String activityLevel;
-	
 	public Long getSurveyId() {
 		return surveyId;
 	}
@@ -21,11 +20,11 @@ public class SurveyResult {
 	public void setParkCode(String parkCode) {
 		this.parkCode = parkCode;
 	}
-	public String getEmail() {
-		return email;
+	public String getEmailaddress() {
+		return emailaddress;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmailaddress(String emailaddress) {
+		this.emailaddress = emailaddress;
 	}
 	public String getState() {
 		return state;
