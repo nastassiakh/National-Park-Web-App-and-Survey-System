@@ -3,16 +3,16 @@ package com.techelevator.npgeek;
 public class SurveyResult {
 	
 	
-	private int surveyId ;
+	private Long surveyId ;
 	private String parkCode;
 	private String email;
 	private String state;
 	private String activityLevel;
 	
-	public int getSurveyId() {
+	public Long getSurveyId() {
 		return surveyId;
 	}
-	public void setSurveyId(int surveyId) {
+	public void setSurveyId(Long surveyId) {
 		this.surveyId = surveyId;
 	}
 	public String getParkCode() {
