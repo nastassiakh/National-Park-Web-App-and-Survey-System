@@ -8,8 +8,9 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class JdbcParkDao implements ParkDao {
 	
 	private JdbcTemplate jdbcTemplate;
@@ -30,15 +31,13 @@ public class JdbcParkDao implements ParkDao {
 			parks.add(newPark);
 		}
 		return parks;
-		
-		
 	}
 	
 	@Override
 	public Park getParkByCode(String parkCode) {
 		Park newPark = new Park();
 		String sqlGetParkByCode = "SELECT * FROM park WHERE parkcode = ? ";
-		SqlRowSet result = jdbcTemplate.queryForRowSet(sqlGetParkByCode,parkCode);
+		SqlRowSet result = jdbcTemplate.queryForRowSet(sqlGetParkByCode, parkCode);
 		if (result.next()) {
 			newPark = mapRowToPark(result);
 		}
@@ -60,7 +59,7 @@ public class JdbcParkDao implements ParkDao {
 		newPark.setAnnualVisitorCount(result.getLong("annualvisitorcount"));
 		newPark.setQuote(result.getString("inspirationalquote"));
 		newPark.setQuoteSource(result.getString("inspirationalquotesource"));
-		newPark.setDescription(result.getNString("parkdescription"));
+		newPark.setDescription(result.getString("parkdescription"));
 		newPark.setEntryFee(result.getLong("entryfee"));
 		newPark.setNumberOfAnimalSpecies(result.getLong("numberofanimalspecies"));
 		
