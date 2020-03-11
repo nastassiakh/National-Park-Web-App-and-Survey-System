@@ -23,38 +23,36 @@
 	</div>
 
 	<div class="formInputGroup">
-		<label for="email">Your Email</label> 
-		<input type="text" name="email" id="email" />
+		<label for="emailaddress">Your Email</label> 
+		<input type="text" name="emailaddress" id="emailaddress" />
 	</div>
 	
 	<div class="formInputGroup">
-		<label for="states">State of residence: </label>
-		 <select name="states" id="states">
-			<option value="AK">Alaska</option>
-			<option value="CA">California</option>
-			<option value="CO">Colorado</option>
-			<option value="FL">Florida</option>
-			<option value="HI">Hawaii</option>
-			<option value="MN">Minnesota</option>
-			<option value="MT">Montana</option>
-			<option value="NJ">New Jersey</option>
-			<option value="NY">New York</option>
-			<option value="PA">Pennsylvania[</option>
-			<option value="TE">Texas</option>
+		<label for="state">State of residence: </label>
+		 <select name="state" id="states">
+			<option value="Arizona">Arizona</option>
+			<option value="California">California</option>
+			<option value="Colorado">Colorado</option>
+			<option value="Florida">Florida</option>
+			<option value="Montana">Montana</option>
+			<option value="Wyoming">Wyoming</option>
+			<option value="Washington">Washington</option>
+			<option value="Tennessee">Tennessee</option>
+			<option value="Ohio">Ohio</option>
 		</select>
 	</div>
 	
 	<div class="formInputGroup">
 	<label for="activityLevel">Activity Level: </label>
 	<br>
-		 <input type="radio" id="inactive" name="inactive" value="inactive">
-		 <label for="inactive">Inactive</label><br>
-		 <input type="radio" id="sedentary" name="sedentary" value="sedentary">
-		 <label for="sedentary">Sedentary</label><br>
-		 <input type="radio" id="active" name="active" value="active">
-		 <label for="active">Active</label><br>
-		 <input type="radio" id="exactive" name="exactive" value="exactive">
-		 <label for="exactive">Extremely Active</label><br>
+		 <input type="radio" id="inactive" name="activityLevel" value="inactive">
+		 <label for="activityLevel">Inactive</label><br>
+		 <input type="radio" id="sedentary" name="activityLevel" value="sedentary">
+		 <label for="activityLevel">Sedentary</label><br>
+		 <input type="radio" id="active" name="activityLevel" value="active">
+		 <label for="activityLevel">Active</label><br>
+		 <input type="radio" id="exactive" name="activityLevel" value="exactive">
+		 <label for="activityLevel">Extremely Active</label><br>
 	</div>	
 			 
 	<input class="submitButton" type="submit" value="Submit" />
