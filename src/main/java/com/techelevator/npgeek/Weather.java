@@ -6,7 +6,17 @@ public class Weather {
 	private Long low;
 	private Long high;
 	private String forecast;
-	public String getParkCode() {
+	private String advisory;
+	
+	
+	
+	public String getAdvisory() {
+		return advisory;
+	}
+	public void setAdvisory(String advisory) {
+		this.advisory = advisory;
+	}
+	public String getParkCode() {	
 		return parkCode;
 	}
 	public void setParkCode(String parkCode) {
