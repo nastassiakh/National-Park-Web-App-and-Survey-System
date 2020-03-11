@@ -29,6 +29,7 @@
 					<p>Low ${day.low}F</p>
 					<p>High ${day.high}F</p>
 					<p>${day.advisory}</p>
+					<p>${day.advisoryTemp}</p>
 				</td>
 			</c:forEach>
 		</tr>
