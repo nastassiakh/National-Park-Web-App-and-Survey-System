@@ -1,11 +1,17 @@
 package com.techelevator;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.techelevator.npgeek.WeatherDAO;
+
 @Controller
 public class NPGeekController {
+	
+	@Autowired
+	private WeatherDAO weatherDao;
 	
 	@RequestMapping("/")
 	public String displayHomepage() {
