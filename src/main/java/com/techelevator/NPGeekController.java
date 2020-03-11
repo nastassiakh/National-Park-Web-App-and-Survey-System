@@ -1,10 +1,15 @@
 package com.techelevator;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.techelevator.npgeek.Weather;
 import com.techelevator.npgeek.WeatherDAO;
 
 @Controller
@@ -19,7 +24,10 @@ public class NPGeekController {
 	}
 	
 	@RequestMapping("/parkdetail")
-	public String displayParkdetail() {
+	public String displayParkdetail(HttpSession session) {
+		List<Weather> forecast = weatherDao.getFiveDayForecast("ENP");
+		session.setAttribute("forecast", forecast);
+		
 		return "parkdetail";
 	}
 	
