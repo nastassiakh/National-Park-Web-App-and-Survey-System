@@ -8,6 +8,21 @@ public class SurveyResult {
 	private String emailaddress;
 	private String state;
 	private String activityLevel;
+	private String parkName;
+	private int numberOfVotes;
+	
+	public int getNumberOfVotes() {
+		return numberOfVotes;
+	}
+	public void setNumberOfVotes(int numberOfVotes) {
+		this.numberOfVotes = numberOfVotes;
+	}
+	public String getParkName() {
+		return parkName;
+	}
+	public void setParkName(String parkName) {
+		this.parkName = parkName;
+	}
 	public Long getSurveyId() {
 		return surveyId;
 	}

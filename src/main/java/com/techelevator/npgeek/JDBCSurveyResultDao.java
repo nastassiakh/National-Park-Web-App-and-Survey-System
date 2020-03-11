@@ -23,6 +23,19 @@ public class JDBCSurveyResultDao implements SurveyResultDao {
 	@Override
 	public List<SurveyResult> getParksByRating() {
 		List<SurveyResult> surveyResults = new ArrayList<SurveyResult>();
+		SurveyResult newSurvey = new SurveyResult();
+		String sqlGetParksByRating = "SELECT parkName ,count(parkName) AS number_of_votes FROM survey_result \n" + 
+				"JOIN park on park.parkcode = survey_result.parkcode group by parkName ORDER BY count(parkName) DESC,parkName ASC";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlGetParksByRating);
+		
+		
+		while (results.next()) {
+			newSurvey = mapRowToResult(results);
+			surveyResults.add(newSurvey);
+		}
+		
+		
+		
 		return null;
 
 	}
@@ -35,6 +48,17 @@ public class JDBCSurveyResultDao implements SurveyResultDao {
 		
 		survey.setSurveyId(surveyId);
 		}
+	private SurveyResult mapRowToResult(SqlRowSet results) {
+
+		SurveyResult newSurvey = new SurveyResult();
+		
+		
+		newSurvey.setParkName(results.getString("parkName"));
+		newSurvey.setNumberOfVotes(results.getInt("number_of_votes FROM survey_result"));
+		
+		return newSurvey;
+
+	}
 
 	
 	private Long getNextId() {
