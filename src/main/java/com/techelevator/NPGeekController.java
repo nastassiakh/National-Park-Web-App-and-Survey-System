@@ -31,7 +31,9 @@ public class NPGeekController {
 	
 
 	@RequestMapping("/")
-	public String displayHomepage() {
+	public String displayHomepage(ModelMap map) {
+		List<Park> parks = parkDao.getAllParks();
+		map.put("parks", parks);
 		return "homepage";
 	}
 
