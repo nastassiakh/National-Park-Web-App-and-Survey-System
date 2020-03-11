@@ -54,7 +54,7 @@ public class JDBCSurveyResultDao implements SurveyResultDao {
 		
 		
 		newSurvey.setParkName(results.getString("parkName"));
-		newSurvey.setNumberOfVotes(results.getInt("number_of_votes FROM survey_result"));
+		newSurvey.setNumberOfVotes(results.getInt("number_of_votes"));
 		
 		return newSurvey;
 
