@@ -6,6 +6,9 @@
 <title>National Park Geek - <c:out value="${param.title}" /></title></title>
 <c:url value="/css/nationalparkgeek.css" var="cssHref" />
 <link rel="stylesheet" href="${cssHref}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>

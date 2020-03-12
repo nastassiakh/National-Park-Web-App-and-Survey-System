@@ -2,11 +2,15 @@ package com.techelevator;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,13 +62,29 @@ public class NPGeekController {
 	}
 
 	@RequestMapping("/submitsurvey")
-	public String viewSurveyInput() {
+	public String viewSurveyInput(Model modelHolder) {
+		if (!modelHolder.containsAttribute("surveyModel")) {
+			modelHolder.addAttribute("surveyModel", new SurveyResult());
+		}
 		return "surveyInput";
 	}
 
+	/*
+	 * @Valid @ModelAttribute("registration") Registration registerFormValues,
+	 * BindingResult result, RedirectAttributes flash
+	 */
 	@RequestMapping(path = "/submitsurvey", method = RequestMethod.POST)
-	public String submitSruvey(SurveyResult survey) {
+	public String submitSruvey(@Valid @ModelAttribute("surveyModel") SurveyResult survey, BindingResult result,
+			RedirectAttributes flash) {
+
+		if (result.hasErrors()) {
+			flash.addFlashAttribute("surveyModel", survey);
+			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "surveyModel", result);
+			return "redirect:/submitsurvey";
+		} 
+		
 		surveyResultDao.createSurveyResult(survey);
+		
 		return "redirect:/viewsurvey";
 	}
 
