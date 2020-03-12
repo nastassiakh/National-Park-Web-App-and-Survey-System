@@ -85,17 +85,17 @@ public class JDBCWeatherDAO implements WeatherDAO {
 				advisory = "Bring some snowshoes!";
 			}
 			if (forecast.contains("rain")) {
-				advisory = "Pack some rain gear and wear waterproof shoes";
+				advisory = "Pack some rain gear and wear waterproof shoes!";
 			}
 			if (forecast.contains("thunderstorm")) {
-				advisory = "Seek shelter and avoid hiking on exposed ridges";
+				advisory = "Seek shelter and avoid hiking on exposed ridges!";
 			}
 			if (forecast.contains("sunny")) {
-				advisory = "Pack some sunblock";
+				advisory = "Pack some sunblock!";
 			}
 
 			if (high > 75) {
-				advisoryTemp = " Bring and extra gallon of water";
+				advisoryTemp = " Bring an extra gallon of water";
 			}
 			if ((high - low) >= 20) {
 				advisoryTemp = " Wear breathable layers";
@@ -105,7 +105,7 @@ public class JDBCWeatherDAO implements WeatherDAO {
 			}
 
 		}
-		return advisory + "\n" + advisoryTemp;
+		return advisory + advisoryTemp;
 	}
 
 }
