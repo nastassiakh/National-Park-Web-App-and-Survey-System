@@ -49,6 +49,9 @@ public class JDBCWeatherDAO implements WeatherDAO {
 	public String celsiusConversion(long temp, String tempScale) {
 		String tempString = "";
 		Long tempLong;
+		if(tempScale == null) {
+			tempScale = "F";
+		}
 		if (tempScale.equals("C")) {
 			tempLong = (Long)(((temp - 32) * 5) / 9);
 			tempString = tempLong.toString() + " " + tempScale;

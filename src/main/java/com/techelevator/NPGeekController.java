@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.techelevator.npgeek.Park;
 import com.techelevator.npgeek.ParkDao;
@@ -46,13 +47,14 @@ public class NPGeekController {
 		String pic = park.getParkCode().toLowerCase();
 		map.put("parkpic", pic);
 		session.setAttribute("parkCode", parkCode);
+		map.put("detailURL", "parkdetail?parkCode=" + parkCode);
 		return "parkdetail";
 	}
 
 	@RequestMapping(path = "/parkdetail", method = RequestMethod.POST)
-	public String getTemp(HttpSession session, @RequestParam String tempScale) {
+	public String getTemp(HttpSession session, @RequestParam String tempScale, @RequestParam String detailURL) {
 		session.setAttribute("tempScale", tempScale);
-		return "redirect:/parkdetail?parkCode=" + session.getAttribute("parkCode");
+		return "redirect:/" + detailURL;
 	}
 
 	@RequestMapping("/submitsurvey")
