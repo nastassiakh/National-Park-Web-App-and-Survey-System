@@ -39,10 +39,13 @@
 				id="tempScale">
 				<option value="F">Fahrenheit</option>
 				<option value="C">Celsius</option>
+				
 
 			</select>
 		</div>
+		<input type="hidden" name = "detailURL" value="${detailURL}" />
 		<input class="submitButton" type="submit" value="Submit" />
+		
 	</form>
 
 </section>
