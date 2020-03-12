@@ -23,14 +23,12 @@ public class NPGeekController {
 
 	@Autowired
 	private WeatherDAO weatherDao;
-	
+
 	@Autowired
 	private ParkDao parkDao;
-	
+
 	@Autowired
 	private SurveyResultDao surveyResultDao;
-	
-	
 
 	@RequestMapping("/")
 	public String displayHomepage(ModelMap map) {
@@ -41,7 +39,7 @@ public class NPGeekController {
 
 	@RequestMapping("/parkdetail")
 	public String displayParkdetail(ModelMap map, @RequestParam String parkCode, HttpSession session) {
-		List<Weather> forecast = weatherDao.getFiveDayForecast(parkCode, (String)session.getAttribute("tempScale"));
+		List<Weather> forecast = weatherDao.getFiveDayForecast(parkCode, (String) session.getAttribute("tempScale"));
 		map.put("forecast", forecast);
 		Park park = parkDao.getParkByCode(parkCode);
 		map.put("park", park);
@@ -69,8 +67,14 @@ public class NPGeekController {
 	}
 
 	@RequestMapping("/viewsurvey")
-	public String viewsurveys() {
+
+	public String viewsurveys(ModelMap map) {
+		List<SurveyResult> surveyResult = surveyResultDao.getParksByRating();
+
+		map.addAttribute("surveyMap", surveyResult);
+
 		return "parkRating";
+
 	}
 
 }
