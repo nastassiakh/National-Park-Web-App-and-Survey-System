@@ -3,13 +3,13 @@ package com.techelevator.npgeek;
 public class Weather {
 	private String parkCode;
 	private Long day;
-	private Long low;
-	private Long high;
+	private String low;
+	private String high;
 	private String forecast;
 	private String advisory;
 	
 	
-	
+
 	public String getAdvisory() {
 		return advisory;
 	}
@@ -28,16 +28,16 @@ public class Weather {
 	public void setDay(Long day) {
 		this.day = day;
 	}
-	public Long getLow() {
+	public String getLow() {
 		return low;
 	}
-	public void setLow(Long low) {
+	public void setLow(String low) {
 		this.low = low;
 	}
-	public Long getHigh() {
+	public String getHigh() {
 		return high;
 	}
-	public void setHigh(Long high) {
+	public void setHigh(String high) {
 		this.high = high;
 	}
 	public String getForecast() {
