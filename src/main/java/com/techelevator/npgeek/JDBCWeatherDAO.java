@@ -23,7 +23,12 @@ public class JDBCWeatherDAO implements WeatherDAO {
 	@Override
 	public List<Weather> getFiveDayForecast(String parkCode, String tempScale) {
 		List<Weather> fiveDayWeather = new ArrayList<Weather>();
-
+/*
+ *if (userTempSelection == c){
+ *high = high * 1.8 + 32;
+ *low = low * 1.8 + 32;
+ *
+ * */
 		String sqlForecast = "SELECT * FROM weather WHERE parkcode = ?";
 		SqlRowSet forecastResults = jdbcTemplate.queryForRowSet(sqlForecast, parkCode);
 
@@ -49,6 +54,9 @@ public class JDBCWeatherDAO implements WeatherDAO {
 	public String celsiusConversion(long temp, String tempScale) {
 		String tempString = "";
 		Long tempLong;
+		if(tempScale == null) {
+			tempScale = "F";
+		}
 		if (tempScale.equals("C")) {
 			tempLong = (Long)(((temp - 32) * 5) / 9);
 			tempString = tempLong.toString() + " " + tempScale;
@@ -77,17 +85,17 @@ public class JDBCWeatherDAO implements WeatherDAO {
 				advisory = "Bring some snowshoes!";
 			}
 			if (forecast.contains("rain")) {
-				advisory = "Pack some rain gear and wear waterproof shoes";
+				advisory = "Pack some rain gear and wear waterproof shoes!";
 			}
 			if (forecast.contains("thunderstorm")) {
-				advisory = "Seek shelter and avoid hiking on exposed ridges";
+				advisory = "Seek shelter and avoid hiking on exposed ridges!";
 			}
 			if (forecast.contains("sunny")) {
-				advisory = "Pack some sunblock";
+				advisory = "Pack some sunblock!";
 			}
 
 			if (high > 75) {
-				advisoryTemp = " Bring and extra gallon of water";
+				advisoryTemp = " Bring an extra gallon of water";
 			}
 			if ((high - low) >= 20) {
 				advisoryTemp = " Wear breathable layers";
@@ -97,7 +105,7 @@ public class JDBCWeatherDAO implements WeatherDAO {
 			}
 
 		}
-		return advisory + "\n" + advisoryTemp;
+		return advisory + advisoryTemp;
 	}
 
 }

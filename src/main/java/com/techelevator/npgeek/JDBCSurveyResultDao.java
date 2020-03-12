@@ -47,6 +47,7 @@ public class JDBCSurveyResultDao implements SurveyResultDao {
 		survey.setSurveyId(surveyId);
 	}
 
+	
 	private SurveyResult mapRowToResult(SqlRowSet results) {
 
 		SurveyResult newSurvey = new SurveyResult();
