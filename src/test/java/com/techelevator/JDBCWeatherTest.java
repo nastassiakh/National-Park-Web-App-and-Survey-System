@@ -13,7 +13,6 @@ public class JDBCWeatherTest extends DAOIntegrationTest{
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	@Test
 	
 	
 	
