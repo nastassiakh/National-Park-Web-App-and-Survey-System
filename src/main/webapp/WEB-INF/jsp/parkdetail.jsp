@@ -35,10 +35,7 @@
 	</table>
 	
 	
-	<input type="hidden" name="high" value="${day.high}">
-	<input type="hidden" name="low" value="${day.high}">
 	
-	<input type="submit" value="Convert Temperature" />
 	
 </section>
 
