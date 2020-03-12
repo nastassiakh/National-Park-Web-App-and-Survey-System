@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface WeatherDAO {
 	
-	public List<Weather> getFiveDayForecast(String parkCode);
+	public List<Weather> getFiveDayForecast(String parkCode, String tempScale);
 	
 
 }
