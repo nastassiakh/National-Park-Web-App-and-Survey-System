@@ -21,7 +21,7 @@ public class JDBCWeatherDAO implements WeatherDAO {
 	}
 
 	@Override
-	public List<Weather> getFiveDayForecast(String parkCode) {
+	public List<Weather> getFiveDayForecast(String parkCode, String tempScale) {
 		List<Weather> fiveDayWeather = new ArrayList<Weather>();
 
 		String sqlForecast = "SELECT * FROM weather WHERE parkcode = ?";
@@ -31,16 +31,48 @@ public class JDBCWeatherDAO implements WeatherDAO {
 			Weather weather = new Weather();
 			weather.setParkCode(forecastResults.getString("parkcode"));
 			weather.setDay(forecastResults.getLong("fivedayforecastvalue"));
-			long low = forecastResults.getLong("low");
-			weather.setLow(low);
-			long high = forecastResults.getLong("high");
-			weather.setHigh(high);
+			weather.setLow(celsiusConversion(forecastResults.getLong("low"), tempScale));
+			weather.setHigh(celsiusConversion(forecastResults.getLong("high"), tempScale));
 			String forecast = forecastResults.getString("forecast");
 			if (forecast.equals("partly cloudy")) {
 				forecast = "partlyCloudy";
 			}
 			weather.setForecast(forecast);
-			String advisory = "";
+
+			weather.setAdvisory(getWeatherAdvisory(parkCode, forecastResults.getLong("fivedayforecastvalue")));
+			fiveDayWeather.add(weather);
+		}
+
+		return fiveDayWeather;
+	}
+
+	public String celsiusConversion(long temp, String tempScale) {
+		String tempString = "";
+		Long tempLong;
+		if (tempScale.equals("C")) {
+			tempLong = (Long)(((temp - 32) * 5) / 9);
+			tempString = tempLong.toString() + " " + tempScale;
+			return tempString;
+		} else {
+			tempLong = (Long)temp;
+			tempString = tempLong.toString() + " " + tempScale;
+			return tempString;
+		}
+	}
+
+	public String getWeatherAdvisory(String parkCode, long dayNum) {
+
+		String sqlAdvisory = "SELECT low, high, forecast FROM weather WHERE parkcode = ? AND fivedayforecastvalue = ?";
+		SqlRowSet advisoryResults = jdbcTemplate.queryForRowSet(sqlAdvisory, parkCode, dayNum);
+
+		String advisory = "";
+		String advisoryTemp = "";
+		while (advisoryResults.next()) {
+
+			long low = advisoryResults.getLong("low");
+			long high = advisoryResults.getLong("high");
+			String forecast = advisoryResults.getString("forecast");
+
 			if (forecast.contains("snow")) {
 				advisory = "Bring some snowshoes!";
 			}
@@ -53,22 +85,19 @@ public class JDBCWeatherDAO implements WeatherDAO {
 			if (forecast.contains("sunny")) {
 				advisory = "Pack some sunblock";
 			}
-			String advisoryTemp = "";
-			if(high > 75) {
+
+			if (high > 75) {
 				advisoryTemp = " Bring and extra gallon of water";
 			}
-			if((high - low) >= 20) {
+			if ((high - low) >= 20) {
 				advisoryTemp = " Wear breathable layers";
 			}
-			if(low < 20) {
+			if (low < 20) {
 				advisoryTemp = " Frigid tempatures can be very dangerous";
 			}
-			weather.setAdvisory(advisory);
-			weather.setAdvisoryTemp(advisoryTemp);
-			fiveDayWeather.add(weather);
-		}
 
-		return fiveDayWeather;
+		}
+		return advisory + "\n" + advisoryTemp;
 	}
 
 }
