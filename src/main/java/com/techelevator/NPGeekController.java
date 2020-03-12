@@ -43,20 +43,22 @@ public class NPGeekController {
 	}
 
 	@RequestMapping("/parkdetail")
-	public String displayParkdetail(ModelMap map, @RequestParam String parkCode) {
-		List<Weather> forecast = weatherDao.getFiveDayForecast(parkCode);
+	public String displayParkdetail(ModelMap map, @RequestParam String parkCode, HttpSession session) {
+		List<Weather> forecast = weatherDao.getFiveDayForecast(parkCode, (String) session.getAttribute("tempScale"));
 		map.put("forecast", forecast);
 		Park park = parkDao.getParkByCode(parkCode);
 		map.put("park", park);
 		String pic = park.getParkCode().toLowerCase();
 		map.put("parkpic", pic);
-
+		session.setAttribute("parkCode", parkCode);
+		map.put("detailURL", "parkdetail?parkCode=" + parkCode);
 		return "parkdetail";
 	}
 
 	@RequestMapping(path = "/parkdetail", method = RequestMethod.POST)
-	public String getTemp() {
-		return "redirect:/parkdetail";
+	public String getTemp(HttpSession session, @RequestParam String tempScale, @RequestParam String detailURL) {
+		session.setAttribute("tempScale", tempScale);
+		return "redirect:/" + detailURL;
 	}
 
 	@RequestMapping("/submitsurvey")
@@ -87,11 +89,14 @@ public class NPGeekController {
 	}
 
 	@RequestMapping("/viewsurvey")
+
 	public String viewsurveys(ModelMap map) {
 		List<SurveyResult> surveyResult = surveyResultDao.getParksByRating();
+
 		map.addAttribute("surveyMap", surveyResult);
 
 		return "parkRating";
+
 	}
 
 }

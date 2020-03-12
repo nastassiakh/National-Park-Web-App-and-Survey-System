@@ -23,16 +23,31 @@
 	<table>
 		<tr>
 			<c:forEach var="day" items="${forecast}">
-				<td>
-				<img src="img/weather/${day.forecast}.png" />
+				<td><img src="img/weather/${day.forecast}.png" />
 					<p>Day ${day.day}</p>
-					<p>Low ${day.low}F</p>
-					<p>High ${day.high}F</p>
-					<p>${day.advisory}</p>
-				</td>
+					<p>Low ${day.low}</p>
+					<p>High ${day.high}</p>
+					<p>${day.advisory}</p></td>
 			</c:forEach>
 		</tr>
 	</table>
+
+	<c:url var="formAction" value="/parkdetail" />
+	<form method="POST" action="${formAction}">
+		<div class="formInputGroup">
+			<label for="tempScale">Convert to</label> <select name="tempScale"
+				id="tempScale">
+				<option value="F">Fahrenheit</option>
+				<option value="C">Celsius</option>
+				
+
+			</select>
+		</div>
+		<input type="hidden" name = "detailURL" value="${detailURL}" />
+		<input class="submitButton" type="submit" value="Submit" />
+		
+	</form>
+
 </section>
 
 <c:import url="/WEB-INF/jsp/common/footer.jsp" />
