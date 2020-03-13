@@ -19,6 +19,14 @@ public class JdbcParkDao implements ParkDao {
 	public JdbcParkDao(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
+	@Override
+	public void createPark(Park newPark) {
+		String sqlCreatePark = "INSERT INTO park (parkcode,parkname,state,acreage,elevationinfeet,milesoftrail,numberofcampsites,climate,yearfounded,annualvisitorcount,inspirationalquote,inspirationalquotesource,parkdescription,entryfee,numberofanimalspecies) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				
+		jdbcTemplate.update(sqlCreatePark,newPark.getParkCode(),newPark.getParkName(),newPark.getState(),newPark.getAcreage(),newPark.getElevation(),newPark.getMilesOfTrail(),newPark.getNumberOfCampsites(),newPark.getClimate(),newPark.getYearFounded(),newPark.getAnnualVisitorCount(),newPark.getQuote(),newPark.getQuoteSource(),newPark.getDescription(),newPark.getEntryFee(),newPark.getNumberOfAnimalSpecies());
+		
+		
+	}
 
 	@Override
 	public List<Park> getAllParks() {
