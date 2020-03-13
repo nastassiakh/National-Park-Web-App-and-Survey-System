@@ -4,25 +4,18 @@ header img {
 }
 
 header {
-	margin: 25px;
+	padding: 25px;
+	background: #4d6600;
 }
 
 header h1 {
 	font-size: 21pt;
 }
 
-body header {
-	background: #4d6600;
-}
-
-body nav{
-	background: #4d6600;
-}
-
-
 nav {
+	background: #4d6600;
 	margin-top: 50px;
-	margin-bottom: 100px;
+	margin-bottom: 50px;
 }
 
 nav h2 {
