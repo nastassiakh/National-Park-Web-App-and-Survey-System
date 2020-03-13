@@ -8,7 +8,7 @@
 </c:import>
 
 
-	<table>
+	<table id="park-rating-table">
 		<tr>
 			<th>National Park</th>
 			<th>Park Name</th>
@@ -21,7 +21,7 @@
 
 				<td><c:out value="${survey.parkName }"></c:out></td>
 
-				<td><c:out value="${survey.numberOfVotes }"></c:out></td>
+				<td id="vote-count"><c:out value="${survey.numberOfVotes }"></c:out></td>
 			</tr>
 
 		</c:forEach>
