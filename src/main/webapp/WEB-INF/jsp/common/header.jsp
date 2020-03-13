@@ -14,7 +14,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
-<body>
+<body id="body">
 	<header>
 		<c:url value="/" var="homePageHref" />
 		<c:url value="/img/logo.png" var="logoSrc" />
