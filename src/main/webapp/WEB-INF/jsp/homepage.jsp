@@ -3,20 +3,19 @@
 <c:import url="/WEB-INF/jsp/common/header.jsp" />
 
 <section id="main-content">
-	<table>
+	<table id="hometable">
 		<c:forEach var="park" items="${parks}">
-			<tr>
-				<td><a
-					href="<c:url value="/parkdetail?parkCode=${park.parkCode}" />">
-						<img class="one"
-						src="<c:url value="img/parks/${park.parkCode.toLowerCase()}.jpg" />" />
-				</a></td>
-				<td>
-					<h2>${park.parkName}</h2>
-					<div>${park.description}</div>
-				</td>
-			</tr>
-
+				<tr>
+					<td><a
+						href="<c:url value="/parkdetail?parkCode=${park.parkCode}" />">
+							<img class="one"
+							src="<c:url value="img/parks/${park.parkCode.toLowerCase()}.jpg" />" />
+					</a></td>
+					<td>
+						<h2>${park.parkName}</h2>
+						<div>${park.description}</div>
+					</td>
+				</tr>
 		</c:forEach>
 
 
