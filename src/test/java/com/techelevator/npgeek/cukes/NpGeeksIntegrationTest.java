@@ -2,6 +2,9 @@ package com.techelevator.npgeek.cukes;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.sql.DataSource;
+
+
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -10,11 +13,22 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import com.techelevator.DAOIntegrationTest;
+import com.techelevator.npgeek.JDBCWeatherDAO;
+import com.techelevator.npgeek.JdbcParkDao;
 
 import org.junit.Assert;
 
-public class NpGeeksIntegrationTest {
+public class NpGeeksIntegrationTest extends DAOIntegrationTest{
 private static WebDriver webDriver;
+private DataSource dataSource = getDataSource();
+private JdbcTemplate jdbc = new JdbcTemplate(dataSource);
+
+JDBCWeatherDAO weatherDao = new JDBCWeatherDAO(dataSource);
+
 	
 	@BeforeClass
 	public static void openWebBrowserForTesting() {
@@ -33,7 +47,7 @@ private static WebDriver webDriver;
 	
 	@AfterClass
 	public static void closeWebBrowser() {
-		webDriver.quit();;
+		webDriver.quit();
 	}
 	
 	@Test
@@ -82,10 +96,40 @@ private static WebDriver webDriver;
 	@Test
 	public void check_navigatio_to_detail_page() throws InterruptedException {
 		WebElement imageToSelect = webDriver.findElement(By.xpath("/html/body/section/table/tbody/tr[1]/td[1]/a/img"));
+		WebElement imageToSelect1 = webDriver.findElement(By.xpath("html/body/section/table/tbody/tr[1]/td[2]/h2"));
+
+		String str = imageToSelect1.getText(); 
 		imageToSelect.click();										
 		TimeUnit.SECONDS.sleep(3);
 		WebElement pageHeader = webDriver.findElement(By.tagName("h2"));
-		Assert.assertEquals("Cuyahoga Valley National Park", pageHeader.getText());
+		
+		Assert.assertEquals(str, pageHeader.getText());
+		
+	}
+	@Test
+	public void check_detail_page_values() throws InterruptedException {
+		WebElement imageToSelect = webDriver.findElement(By.xpath("/html/body/section/table/tbody/tr[1]/td[1]/a/img"));
+		WebElement imageToSelect1 = webDriver.findElement(By.xpath("html/body/section/table/tbody/tr[1]/td[2]/h2"));
+		String str = imageToSelect1.getText(); 
+		imageToSelect.click();										
+		TimeUnit.SECONDS.sleep(3);
+		
+		WebElement tempScalevalue = webDriver.findElement(By.xpath("/html/body/section/div/form/div/select"));
+		
+		Select select = new Select(tempScalevalue);
+		WebElement option = select.getFirstSelectedOption();
+		String tempScale = option.getAttribute("value");
+		
+		
+		WebElement dayValue = webDriver.findElement(By.xpath("/html/body/section/table/tbody/tr/td[1]/p[1]"));
+		WebElement low = webDriver.findElement(By.xpath("/html/body/section/table/tbody/tr/td[1]/p[2]"));
+		WebElement high = webDriver.findElement(By.xpath("/html/body/section/table/tbody/tr/td[1]/p[3]"));
+		WebElement advisory = webDriver.findElement(By.xpath("/html/body/section/table[2]/tbody/tr/td[1]/p[4]"));
+		//WebElement advisoryTemp = webDriver.findElement(By.xpath("/html/body/section/table/tbody/tr/td[1]/p[1]"));
+		Assert.assertEquals( "Day " +weatherDao.getFiveDayForecastByName(str,tempScale).get(0).getDay(),dayValue.getText());
+		Assert.assertEquals("Low "+weatherDao.getFiveDayForecastByName(str, tempScale).get(0).getLow(), low.getText());
+		Assert.assertEquals("High "+weatherDao.getFiveDayForecastByName(str, tempScale).get(0).getHigh(), high.getText());
+		Assert.assertEquals(weatherDao.getWeatherAdvisoryByName(str, weatherDao.getFiveDayForecastByName(str,tempScale).get(0).getDay()), advisory.getText());
 		
 		
 	}
