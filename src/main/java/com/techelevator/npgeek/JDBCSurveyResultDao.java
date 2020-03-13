@@ -38,23 +38,51 @@ public class JDBCSurveyResultDao implements SurveyResultDao {
 	}
 
 	@Override
-	public void createSurveyResult(SurveyResult survey) {
+	public SurveyResult createSurveyResult(SurveyResult survey) {
 		Long surveyId = getNextId();
 		String sqlInsertSurvey = "INSERT INTO survey_result(surveyId, parkCode, emailaddress, state, activityLevel) VALUES (?,?,?,?,?)";
 		jdbcTemplate.update(sqlInsertSurvey, surveyId, survey.getParkCode(), survey.getEmailaddress(),
 				survey.getState(), survey.getActivityLevel());
 
 		survey.setSurveyId(surveyId);
+		return survey;
+	}
+	
+	@Override
+	public SurveyResult findSurveyById(long surveyId) {
+		SurveyResult theSurvey = null;
+		String sqlSurveyById = "SELECT surveyId, parkCode, emailaddress, state, activityLevel " + "FROM survey_result " + "WHERE surveyId = ?";
+		SqlRowSet results2 = jdbcTemplate.queryForRowSet(sqlSurveyById, surveyId);
+		if (results2.next()) {
+			theSurvey = mapRowToResult2(results2);
+		}
+		return theSurvey;
 	}
 
+	
+	private SurveyResult mapRowToResult2(SqlRowSet results2) {
+		SurveyResult newSurvey2 = new SurveyResult();
+	    newSurvey2.setSurveyId(results2.getLong("surveyid"));
+		newSurvey2.setState(results2.getString("state"));
+		newSurvey2.setEmailaddress(results2.getString("emailaddress"));
+		newSurvey2.setActivityLevel(results2.getString("activitylevel"));
+		newSurvey2.setParkCode(results2.getString("parkcode"));
+		return newSurvey2;
+		
+		
+	}
 	
 	private SurveyResult mapRowToResult(SqlRowSet results) {
 
 		SurveyResult newSurvey = new SurveyResult();
 
-		newSurvey.setParkName(results.getString("parkName"));
-		newSurvey.setParkCode(results.getString("parkCode"));
+	    newSurvey.setParkName(results.getString("parkname"));
+		newSurvey.setParkCode(results.getString("parkcode"));
 		newSurvey.setNumberOfVotes(results.getInt("count"));
+		//newSurvey.setSurveyId(results.getLong("surveyid"));
+		//newSurvey.setState(results.getString("state"));
+		//newSurvey.setEmailaddress(results.getString("emailaddress"));
+		//newSurvey.setActivityLevel(results.getString("activitylevel"));
 		return newSurvey;
 
 	}

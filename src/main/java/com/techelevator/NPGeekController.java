@@ -89,7 +89,6 @@ public class NPGeekController {
 	}
 
 	@RequestMapping("/viewsurvey")
-
 	public String viewsurveys(ModelMap map) {
 		List<SurveyResult> surveyResult = surveyResultDao.getParksByRating();
 
