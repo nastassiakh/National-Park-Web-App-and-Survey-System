@@ -35,9 +35,10 @@ private static WebDriver webDriver;
 	public static void closeWebBrowser() {
 		webDriver.quit();;
 	}
+	
 	@Test
 	public void check_HomePage() {
-		WebElement home = webDriver.findElement(By.xpath("/html/body/nav/ul/li[1]/a"));
+		WebElement home = webDriver.findElement(By.xpath("/html/body/nav/ul/li[1]/a"));///html/body/nav/ul/li[1]/a
 		WebElement submitSurvey = webDriver.findElement(By.xpath("/html/body/nav/ul/li[2]/a"));
 		WebElement viewSurveys = webDriver.findElement(By.xpath("/html/body/nav/ul/li[3]/a"));
 		Assert.assertEquals("Home", home.getText());

@@ -163,5 +163,13 @@ nav ul li {
 
 .radio2{
 	padding-right:14px;
+}
 
+#rating-img{
+	width:40%;
+	padding:2%;
+}
+
+.rating-table{
+	padding: 20px;
 }

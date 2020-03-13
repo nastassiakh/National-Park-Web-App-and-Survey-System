@@ -7,7 +7,7 @@
 	<c:param name="title" value="Park Rating" />
 </c:import>
 
-
+<div class="rating-table">
 	<table>
 		<tr>
 			<th>National Park</th>
@@ -16,8 +16,7 @@
 		</tr>
 		<c:forEach items="${surveyMap }" var="survey">
 			<tr>
-				<td><img
-					src="<c:url value="img/parks/${survey.parkCode.toLowerCase() }.jpg" />" /></td>
+				<td><img id="rating-img" src="<c:url value="img/parks/${survey.parkCode.toLowerCase() }.jpg" />" /></td>
 
 				<td><c:out value="${survey.parkName }"></c:out></td>
 
@@ -26,6 +25,6 @@
 
 		</c:forEach>
 	</table>
-
+</div>
 </body>
 </html>
