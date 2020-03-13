@@ -1,10 +1,14 @@
+#body{
+	background-color:#ffffe6;
+}
+
 header img {
 	width: 400px;
 	height: auto;
 }
 
 header {
-	padding: 25px;
+	padding: 10px;
 	background: #4d6600;
 }
 
@@ -14,8 +18,8 @@ header h1 {
 
 nav {
 	background: #4d6600;
-	margin-top: 50px;
-	margin-bottom: 50px;
+	height: 50px;
+	
 }
 
 nav h2 {
@@ -37,7 +41,9 @@ li {
 }
 
 li a {
-	color: #0D118B;
+	font-size: 12pt;
+	font-weight: bold;
+	color: black;
 	text-decoration: none;
 	list-style: none;
 	text-align: center;
@@ -46,6 +52,7 @@ li a {
 
 nav ul {
 	width: 100%;
+	margin: 0px;
 }
 
 nav ul li {
@@ -62,7 +69,6 @@ nav ul li {
 #main-content {
 	color: black;
 	border-radius: 10px;
-	margin: 60px 78px;
 	min-height: 400px;
 	padding-top: 10px;
 }
@@ -79,10 +85,58 @@ nav ul li {
 
 #hometable {
   border-collapse: separate;
-  border-spacing: 50px 0;
+  border-spacing: 50px;
 }
 
-#hometable td {
+#hometable h2{
+	font-size: 40px;
+	font-weight: bold;
+}
+
+#hometable div{
+	font-size: 20px;
+}
+
+#hometable img{
+	width: 600px;
+	height: 433px;
+}
+
+#detail-table-weather{
+	width: 90%;
+	margin: 25px;
+}
+
+#detail-table-weather td{
+	vertical-align: top;
+	width: 150px;
+	font-size: 14pt;
+	padding: 15px;
+}
+
+#detail-table-weather img{
+	width: 150px;
+	height: 150px;
+}
+
+#detail-table td {
   padding: 10px;
+  font-size: 14pt;
+}
+
+#detail-table img{
+	width: 650px;
+	height: 433px;
+}
+
+
+#tempButton{
+	padding: 10px;
+	margin-left: 10px;
+}
+
+.bold{
+	font-size: 14pt;
+	font-weight: bold;
 }
 
