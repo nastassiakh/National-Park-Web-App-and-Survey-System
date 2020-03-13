@@ -35,7 +35,8 @@
 	<c:url var="formAction" value="/parkdetail" />
 	<form method="POST" action="${formAction}">
 		<div class="formInputGroup">
-			<label for="tempScale">Convert to</label> <select name="tempScale"
+			<label for="tempScale">Convert to</label> 
+			<select name="tempScale"
 				id="tempScale">
 				<option value="F">Fahrenheit</option>
 				<option value="C">Celsius</option>
