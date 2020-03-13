@@ -79,10 +79,7 @@ public class JDBCSurveyResultDao implements SurveyResultDao {
 	    newSurvey.setParkName(results.getString("parkname"));
 		newSurvey.setParkCode(results.getString("parkcode"));
 		newSurvey.setNumberOfVotes(results.getInt("count"));
-		//newSurvey.setSurveyId(results.getLong("surveyid"));
-		//newSurvey.setState(results.getString("state"));
-		//newSurvey.setEmailaddress(results.getString("emailaddress"));
-		//newSurvey.setActivityLevel(results.getString("activitylevel"));
+	
 		return newSurvey;
 
 	}

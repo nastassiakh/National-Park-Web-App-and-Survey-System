@@ -33,8 +33,8 @@ public class JDBCSurveyTests extends DAOIntegrationTest {
 	}
 
 	@Before
-	public void setUp() {//creating mocking survey in table survey_result to be able test it
-		//String sqlDeleteSurvey = "DELETE from survey_result";
+	public void setUp() {// creating mocking survey in table survey_result to be able test it
+		// String sqlDeleteSurvey = "DELETE from survey_result";
 		/*
 		 * String sqlSelectNextId = "SELECT NEXTVAL(('seq_surveyid'::regclass))";
 		 * SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectNextId);
@@ -46,9 +46,10 @@ public class JDBCSurveyTests extends DAOIntegrationTest {
 		 * ; jdbcTemplate.update(sqlInsertSurvey, surveyId);
 		 */
 
-		//surveyDao = new JDBCSurveyResultDao(dataSource);
-		
-		//jdbcTemplate.update(qlDeleteSurvey);
+		// surveyDao = new JDBCSurveyResultDao(dataSource);
+
+		// jdbcTemplate.update(qlDeleteSurvey);
+
 	}
 
 	@Test
@@ -59,39 +60,57 @@ public class JDBCSurveyTests extends DAOIntegrationTest {
 		newSurveyResult.setEmailaddress("java@gmail.com");
 		newSurveyResult.setState("Florida");
 		newSurveyResult.setActivityLevel("Sedentary");
-		
-        newSurveyResult.setSurveyId((long)900000000);
-	
-        surveyDao.createSurveyResult(newSurveyResult);//use create method from JDBC
-        
+
+		newSurveyResult.setSurveyId((long) 900000000);
+
+		surveyDao.createSurveyResult(newSurveyResult);// use create method from JDBC
+
 		// Now we have to test that that all worked as expected
 		// next we are pulling out the unique ID to look the new row up in the database
 		// Then we make a new Department object from whatever we fetch from the database
-       SurveyResult createdSurveyResult = surveyDao.findSurveyById(newSurveyResult.getSurveyId());
+		SurveyResult createdSurveyResult = surveyDao.findSurveyById(newSurveyResult.getSurveyId());
 
 		// Then we make sure our object that pulled from the database is not null
-        assertNotEquals(null, newSurveyResult.getParkCode());
-        
+		assertNotEquals(null, newSurveyResult.getParkCode());
+
 		// Then we make sure the name of the object we created is the same as the object
 		// we got from the database. Have helper method assertSurveysAreEqual down below
-        assertSurveysAreEqual(newSurveyResult, createdSurveyResult);
-		
+		assertSurveysAreEqual(newSurveyResult, createdSurveyResult);
+
 	}
 
-	
-	
-	 @Test 
-	 public void get_parks_by_rating() { List<SurveyResult> surveyList =
-	 surveyDao.getParksByRating();
-	 
-	 Assert.assertNotNull(surveyList); Assert.assertEquals(1, surveyList.size());
-	 // Department dept = deptList.get(0); Assert.assertEquals(testDepartmentName,
-	 deptList.get(0).getName()); 
-	 }
-	 
-	 
-	 
-	
+	@Test
+	public void get_parks_by_rating() {
+
+		SurveyResult newSurveyResult = new SurveyResult();
+		newSurveyResult.setParkCode("DDD");
+		newSurveyResult.setEmailaddress("jamba@gmail.com");
+		newSurveyResult.setState("Wherever");
+		newSurveyResult.setActivityLevel("Active");
+
+		newSurveyResult.setSurveyId((long) 800000000);
+
+		surveyDao.createSurveyResult(newSurveyResult);
+
+		int newSurveyVotes = newSurveyResult.getNumberOfVotes();
+
+		
+		List<SurveyResult> surveyList = surveyDao.getParksByRating();
+
+		SurveyResult testResult = surveyList.get(0);
+		
+		int firstSurveyVotes = testResult.getNumberOfVotes();
+		
+        boolean votes = false;
+		if (firstSurveyVotes >= newSurveyVotes) {
+           votes = true;
+		}
+
+		Assert.assertNotNull(surveyList);
+		Assert.assertTrue(votes);
+
+	}
+
 	private void assertSurveysAreEqual(SurveyResult expected, SurveyResult actual) {
 		assertEquals(expected.getSurveyId(), actual.getSurveyId());
 		assertEquals(expected.getParkCode(), actual.getParkCode());

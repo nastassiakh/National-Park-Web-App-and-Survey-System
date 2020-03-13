@@ -86,3 +86,28 @@ nav ul li {
   padding: 10px;
 }
 
+.formInputGroup{
+	padding:5px;
+}
+.survey{
+	padding-left:5%;
+}
+#emailaddress {
+        border-radius: 5px;
+} 
+.row{
+	display:flex;
+	justify-content:flex-start;
+
+}
+
+#activity{
+	padding-left:14px;
+	padding-right: 5px;
+}
+
+
+.radio2{
+	padding-right:14px;
+
+}
