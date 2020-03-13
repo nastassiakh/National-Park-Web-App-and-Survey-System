@@ -103,12 +103,15 @@ nav ul li {
 }
 
 #detail-table-weather{
-	width: 100%;
+	width: 90%;
+	margin: 25px;
 }
 
 #detail-table-weather td{
 	vertical-align: top;
 	width: 150px;
+	font-size: 14pt;
+	padding: 15px;
 }
 
 #detail-table-weather img{
@@ -118,5 +121,22 @@ nav ul li {
 
 #detail-table td {
   padding: 10px;
+  font-size: 14pt;
+}
+
+#detail-table img{
+	width: 650px;
+	height: 433px;
+}
+
+
+#tempButton{
+	padding: 10px;
+	margin-left: 10px;
+}
+
+.bold{
+	font-size: 14pt;
+	font-weight: bold;
 }
 
