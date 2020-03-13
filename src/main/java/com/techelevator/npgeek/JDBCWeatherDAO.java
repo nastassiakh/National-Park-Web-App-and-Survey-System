@@ -19,6 +19,73 @@ public class JDBCWeatherDAO implements WeatherDAO {
 	public JDBCWeatherDAO(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
+	
+	@Override
+	public List<Weather> getFiveDayForecastByName(String parkName,String tempScale) {
+		List<Weather> fiveDayWeather = new ArrayList<Weather>();
+
+		String sqlForecast = "SELECT * FROM weather WHERE parkcode =(SELECT parkcode FROM park WHERE parkname = ?)";
+		SqlRowSet forecastResults = jdbcTemplate.queryForRowSet(sqlForecast, parkName);
+
+		while (forecastResults.next()) {
+			Weather weather = new Weather();
+			weather.setParkCode(forecastResults.getString("parkcode"));
+			weather.setDay(forecastResults.getLong("fivedayforecastvalue"));
+			weather.setLow(celsiusConversion(forecastResults.getLong("low"), tempScale));
+			weather.setHigh(celsiusConversion(forecastResults.getLong("high"), tempScale));
+			String forecast = forecastResults.getString("forecast");
+			if (forecast.equals("partly cloudy")) {
+				forecast = "partlyCloudy";
+			}
+			weather.setForecast(forecast);
+
+			weather.setAdvisory(getWeatherAdvisory(weather.getParkCode(), forecastResults.getLong("fivedayforecastvalue")));
+			fiveDayWeather.add(weather);
+		}
+		return 	fiveDayWeather;
+			
+		}
+	@Override
+	public String getWeatherAdvisoryByName(String parkname, long dayNum) {
+
+		String sqlAdvisory = "SELECT low, high, forecast FROM weather WHERE parkcode =(SELECT parkcode FROM park WHERE parkname =?) AND fivedayforecastvalue = ?";
+		SqlRowSet advisoryResults = jdbcTemplate.queryForRowSet(sqlAdvisory, parkname, dayNum);
+
+		String advisory = "";
+		String advisoryTemp = "";
+		while (advisoryResults.next()) {
+
+			long low = advisoryResults.getLong("low");
+			long high = advisoryResults.getLong("high");
+			String forecast = advisoryResults.getString("forecast");
+
+			if (forecast.contains("snow")) {
+				advisory = "Bring some snowshoes!";
+			}
+			if (forecast.contains("rain")) {
+				advisory = "Pack some rain gear and wear waterproof shoes!";
+			}
+			if (forecast.contains("thunderstorm")) {
+				advisory = "Seek shelter and avoid hiking on exposed ridges!";
+			}
+			if (forecast.contains("sunny")) {
+				advisory = "Pack some sunblock!";
+			}
+
+			if (high > 75) {
+				advisoryTemp = " Bring an extra gallon of water";
+			}
+			if ((high - low) >= 20) {
+				advisoryTemp = " Wear breathable layers";
+			}
+			if (low < 20) {
+				advisoryTemp = " Frigid tempatures can be very dangerous";
+			}
+
+		}
+		return advisory + advisoryTemp;
+	}
+
 
 	@Override
 	public List<Weather> getFiveDayForecast(String parkCode, String tempScale) {
