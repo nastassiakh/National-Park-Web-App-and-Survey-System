@@ -46,8 +46,8 @@
 		<tr>
 			<c:forEach var="day" items="${forecast}">
 				<td><img src="img/weather/${day.forecast}.png" />
-					<p>Low ${day.low}</p>
-					<p>High ${day.high}</p> <c:if test="${day.day == 1}">
+					<p>Low ${day.low}&#176;</p>
+					<p>High ${day.high}&#176;</p> <c:if test="${day.day == 1}">
 						<p>${day.advisory}</p>
 					</c:if></td>
 			</c:forEach>
