@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>National Park Geek - <c:out value="${param.title}" /></title>
+<title>National Park Geek  <c:out value="${param.title}" /></title>
 <c:url value="/css/nationalparkgeek.css" var="cssHref" />
 <link rel="stylesheet" href="${cssHref}">
 <link rel="stylesheet"

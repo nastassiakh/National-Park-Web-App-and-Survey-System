@@ -49,9 +49,10 @@ JDBCWeatherDAO weatherDao = new JDBCWeatherDAO(dataSource);
 	public static void closeWebBrowser() {
 		webDriver.quit();
 	}
+	
 	@Test
 	public void check_HomePage() {
-		WebElement home = webDriver.findElement(By.xpath("/html/body/nav/ul/li[1]/a"));
+		WebElement home = webDriver.findElement(By.xpath("/html/body/nav/ul/li[1]/a"));///html/body/nav/ul/li[1]/a
 		WebElement submitSurvey = webDriver.findElement(By.xpath("/html/body/nav/ul/li[2]/a"));
 		WebElement viewSurveys = webDriver.findElement(By.xpath("/html/body/nav/ul/li[3]/a"));
 		Assert.assertEquals("Home", home.getText());
@@ -94,22 +95,21 @@ JDBCWeatherDAO weatherDao = new JDBCWeatherDAO(dataSource);
 	
 	@Test
 	public void check_navigatio_to_detail_page() throws InterruptedException {
-		WebElement imageToSelect = webDriver.findElement(By.xpath("/html/body/section/table/tbody/tr[1]/td[1]/a/img"));
-		WebElement imageToSelect1 = webDriver.findElement(By.xpath("html/body/section/table/tbody/tr[1]/td[2]/h2"));
+		WebElement imageToSelect = webDriver.findElement(By.xpath("/html/body/section/table/tbody/tr[1]/td[1]/a/img"));//home page img
+		WebElement imageToSelect1 = webDriver.findElement(By.xpath("html/body/section/table/tbody/tr[1]/td[2]/h2"));//home page h2 element with text
 
 		String str = imageToSelect1.getText(); 
 		imageToSelect.click();										
 		TimeUnit.SECONDS.sleep(3);
-		WebElement pageHeader = webDriver.findElement(By.tagName("h2"));
+		WebElement pageHeader = webDriver.findElement(By.tagName("h2"));// header from detail page
 		
 		Assert.assertEquals(str, pageHeader.getText());
 		
 	}
 	@Test
 	public void check_detail_page_values() throws InterruptedException {
-		WebElement imageToSelect = webDriver.findElement(By.xpath("/html/body/section/table/tbody/tr[1]/td[1]/a/img"));
-		WebElement imageToSelect1 = webDriver.findElement(By.xpath("html/body/section/table/tbody/tr[1]/td[2]/h2"));
-		String str = imageToSelect1.getText(); 
+		WebElement imageToSelect = webDriver.findElement(By.xpath("/html/body/section/table/tbody/tr[1]/td[1]/a/img"));//home page img
+		WebElement imageToSelect1 = webDriver.findElement(By.xpath("html/body/section/table/tbody/tr[1]/td[2]/h2"));//home page h2 element with text
 		imageToSelect.click();										
 		TimeUnit.SECONDS.sleep(3);
 		

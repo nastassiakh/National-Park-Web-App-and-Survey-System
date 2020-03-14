@@ -24,7 +24,7 @@ public class JDBCSurveyTests extends DAOIntegrationTest {
 	private JdbcTemplate jdbcTemplate;
 	private JDBCSurveyResultDao surveyDao;
 	private DataSource dataSource = getDataSource();
-
+	SurveyResult newSurveyResult;
 	Long surveyId = new Long(0);
 
 	public JDBCSurveyTests() {
@@ -33,29 +33,16 @@ public class JDBCSurveyTests extends DAOIntegrationTest {
 	}
 
 	@Before
-	public void setUp() {// creating mocking survey in table survey_result to be able test it
-		// String sqlDeleteSurvey = "DELETE from survey_result";
-		/*
-		 * String sqlSelectNextId = "SELECT NEXTVAL(('seq_surveyid'::regclass))";
-		 * SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectNextId);
-		 * results.next(); // advances to the first row surveyId = results.getLong(1);
-		 * // returns the integer value of the first column of table (i.e. index 1)
-		 * 
-		 * String sqlInsertSurvey =
-		 * "INSERT INTO survey_result(surveyid, parkcode, emailaddress, state, activitylevel) VALUES (?, 'GPG', 'xxx@gmail.com', 'PA', 'Extremely Active')"
-		 * ; jdbcTemplate.update(sqlInsertSurvey, surveyId);
-		 */
-
-		// surveyDao = new JDBCSurveyResultDao(dataSource);
-
-		// jdbcTemplate.update(qlDeleteSurvey);
+	public void setUp() {
+		
+		
 
 	}
 
 	@Test
 	public void test_create_survey_result() {
 
-		SurveyResult newSurveyResult = new SurveyResult();
+	    newSurveyResult = new SurveyResult();
 		newSurveyResult.setParkCode("XXX");
 		newSurveyResult.setEmailaddress("java@gmail.com");
 		newSurveyResult.setState("Florida");

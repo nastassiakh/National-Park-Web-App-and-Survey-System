@@ -69,10 +69,7 @@ public class NPGeekController {
 		return "surveyInput";
 	}
 
-	/*
-	 * @Valid @ModelAttribute("registration") Registration registerFormValues,
-	 * BindingResult result, RedirectAttributes flash
-	 */
+	
 	@RequestMapping(path = "/submitsurvey", method = RequestMethod.POST)
 	public String submitSruvey(@Valid @ModelAttribute("surveyModel") SurveyResult survey, BindingResult result,
 			RedirectAttributes flash) {
