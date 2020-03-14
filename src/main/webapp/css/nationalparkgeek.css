@@ -172,30 +172,30 @@ nav ul li {
 }
 
 #park-rating-table{
-	margin: 20px;
-	text-align: center;
-	width: 95%;
-	border-spacing: 30px;
-	font-size: 24pt;
-	border-collapse: collapse;
-	border: 1px solid black;
+    margin: 20px;
+    text-align: center;
+    width: 95%;
+    border-spacing: 30px;
+    font-size: 24pt;
+    border-collapse: collapse;
+    border: 1px solid black;
 }
 
 #park-rating-table th {
-	text-align: center;
-	font-size: 32pt;
-	font-weight: bold;
-	border: 5px solid black;
+    text-align: center;
+    font-size: 32pt;
+    font-weight: bold;
+    border: 5px solid black;
 }
 
 #vote-count{
-	padding: 50px;
+    padding: 50px;
 }
 
 #park-rating-table td {
-	border: 5px solid black;
+    border: 5px solid black;
 }
 
 #park-rating-table img{
-	width: 100%;
+    width: 100%;
 }
